@@ -1,3 +1,5 @@
+
+//PowerBall logic
 var pickPrice = 2.00;
 var winningNumbers = [];
 var tickets = [];
@@ -28,6 +30,7 @@ function pickNumbers() {
 }
 
 function buyTickets(numberOfTickets) {
+  console.log("Buying ",numberOfTickets," tickets...");
   tickets = [];
   for (var i = 0; i < numberOfTickets; i++) {
     tickets.push(pickNumbers());
@@ -85,30 +88,95 @@ function getWinnings(matches, powerBall) {
 }
 
 function totalWinnings() {
+  console.log("Checking for winners...");
   for (var i = 0; i < tickets.length; i++) {
     ticket = tickets[i];
     results = checkTicket(ticket);
     if (results.winner) {
       winners.push(results);
-      console.log(results);
+      //console.log(results);
       winnings += results.winnings;
-      console.log(winnings);
+      //console.log(winnings);
     }
   }
 }
 
-winningNumbers = [7, 9, 49, 52, 62, 17];
+function reset() {
+  winningNumbers = [];
+  tickets = [];
+  winnings = 0;
+  jackpot = 1500000000;
+  winners = [];
+}
+
+// winningNumbers = [7, 9, 49, 52, 62, 17];
+
+// tickets.push([7, 9, 49, 52, 62, 17]);
+// tickets.push([7, 9, 49, 52, 62, 3]);
+// tickets.push([7, 9, 49, 52, 61, 3]);
+
+// totalWinnings();
+
+// console.log(winningNumbers);
+// console.log(winners.length);
+// console.log(winnings);
+function play(numberOfTickets) {
+  reset();
+  buyTickets(numberOfTickets);
+  var cashSpent = tickets.length * 2;
+  drawWinner();
+  setDomBalls();
+  totalWinnings();
+  console.log(winningNumbers);
+  console.log(winners.length);
+  console.log('You spent $' + cashSpent + ' and won $' + winnings + ".");
+}
 
 
-tickets.push([7, 9, 49, 52, 62, 17]);
-tickets.push([7, 9, 49, 52, 62, 3]);
-tickets.push([7, 9, 49, 52, 61, 3]);
+//UI jquery
+$(":button").click(function(){
+    $("h1").text($("#tickets").val());
+    console.log("hi");
+});
+
+function setDomBalls() {
+  for (var i = 0; i < 6; i ++) {
+    $("#winning-numbers li").eq(i).text(winningNumbers[i]);
+    console.log('butt');
+  }
+}
 
 
-totalWinnings();
 
-//console.log(tickets);
-console.log(winningNumbers);
-console.log(winners.length);
-console.log(winnings);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,58 @@
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  align-items: top center;
+  height: 100%;
+}
+.balls {
+  width: 100%;
+  min-width: 14.5rem;
+}
+
+.ball {
+  display: inline-block;
+  background-color: #fff;
+  width: 2rem;
+  height: 2rem;
+  -webkit-box-shadow: 0 0 .5rem 2rem black;
+  box-shadow: 0 0 .5rem black;
+  margin-right: .5rem
+}
+
+.ball:last-child {
+  margin-right: 0;
+}
+
+.ball.power {
+  background-color: red;
+  border-width: 2px;
+  border-color: black;
+}
+
+.winning-numbers {
+  line-height: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: table;
+  margin: 2rem auto;
+  height: 2rem;
+  vertical-align: middle;
+  line-height: 0;
+}
+li {
+  display: inline-block;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.container {
+  width: 100%;
+  padding-top: 2rem
+}
