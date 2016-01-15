@@ -1,6 +1,6 @@
 
 //PowerBall logic
-var pickPrice = 2.00;
+var ticketPrice = 2.00;
 var winningNumbers = [];
 var tickets = [];
 var winnings = 0;
@@ -121,21 +121,34 @@ function reset() {
 // console.log(winners.length);
 // console.log(winnings);
 function play(numberOfTickets) {
+  cashSpent = numberOfTickets * ticketPrice;
   reset();
-  buyTickets(numberOfTickets);
-  var cashSpent = tickets.length * 2;
-  drawWinner();
-  setDomBalls();
-  totalWinnings();
-  console.log(winningNumbers);
-  console.log(winners.length);
-  console.log('You spent $' + cashSpent + ' and won $' + winnings + ".");
+  if (numberOfTickets > 100000) {
+    badInput();
+  }
+  else {
+    buyTickets(numberOfTickets);
+    drawWinner();
+    setDomBalls();
+    totalWinnings();
+    console.log(winningNumbers);
+    console.log(winners.length);
+    console.log('You spent $' + cashSpent + ' and won $' + winnings + ".");
+    $(".card-block h1").text('You spent $' + cashSpent + ' and won $' + winnings + ".");
+  }
+}
+
+function badInput() {
+  //$(".card-block h1").text(' $' + cashSpent + ' and won $' + winnings + ".");
+  //$(".form-control").attr("placeholder", "Fuck that, i'll front you on 100,000 max!");
+  alert("No way you have $" + cashSpent + " to drop on tickets. Try again big shot (max buy = 100,000)");
 }
 
 
 //UI jquery
 $(":button").click(function(){
-    $("h1").text($("#tickets").val());
+    //$("h1").text($("#tickets").val());
+    play($(".form-control").val());
     console.log("hi");
 });
 
