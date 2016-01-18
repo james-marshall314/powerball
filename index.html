@@ -13,7 +13,6 @@
   <body>
     <div class="wrapper">
       <div class="container">
-        <h1>Let's Fucking Gamble!</h1>
         <div class="balls">
           <ul id="winning-numbers">
             <li class="ball img-circle"></li>
@@ -24,27 +23,26 @@
             <li class="ball power img-circle"></li>
           </ul>
         </div>
-        <!-- <div class="balls">
-          <div class="winning-numbers">
-            <div class="ball img-circle"></div>
-            <div class="ball img-circle"></div>
-            <div class="ball img-circle"></div>
-            <div class="ball img-circle"></div>
-            <div class="ball img-circle"></div>
-            <div class="ball power img-circle"></div>
-          </div>
-        </div> -->
+        
         <div class="card card-block">
           <h1>Let's Fucking Gamble!</h1>
+          <ul>
+            <h3>Totals:</h3>
+            <li>Tickets played: <span id="tickets-played">0</span></li>
+            <li>Winning tickets: <span id="winning-tickets">0</span></li>
+            <li>Spent: $<span id="money-spent">0</span></li>
+            <li>Won: $<span id="money-won">0</span></li>
+            <li>Net Worth: <span id="net-worth">0</span> Dollars</li>
+          </ul>
 
           
           <div class="input-group">
-            
-              <input type="number" min="1" max="1000" class="form-control" placeholder="Max 100000">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Buy Now!</button>
-              </span>
-            
+            <fieldset class="form-group">
+                <label>How many picks you need dawg?</label>
+                <input type="number" min="1" max="1000" class="form-control" placeholder="Max 100000">
+            </fieldset>
+            <button id="play" class="btn btn-primary" type="button">Pick me a winner!</button>
+            <button id="reset" class="btn btn-danger" type="button">RESET</button>
           </div>
         </div>
       </div>
