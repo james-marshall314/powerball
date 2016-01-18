@@ -36,8 +36,12 @@ body {
 .winning-numbers {
   line-height: 0;
 }
-
 ul {
+  list-style: none;
+  padding: 0;
+}
+
+.balls ul {
   list-style: none;
   padding: 0;
   display: table;
@@ -46,13 +50,20 @@ ul {
   vertical-align: middle;
   line-height: 0;
 }
-li {
+.balls li {
   display: inline-block;
   text-align: center;
   line-height: 2rem;
 }
+.card li {
+  padding-left: 1rem;
+}
 
 .container {
   width: 100%;
-  padding-top: 2rem
+  padding-top: 2rem;
+}
+
+button {
+  margin-right: 1rem;
 }

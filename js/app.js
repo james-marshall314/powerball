@@ -7,6 +7,13 @@ var winnings = 0;
 var jackpot = 1500000000
 var winners = [];
 
+//lifetime totals
+var ticketsPlayed = 0;
+var winningTickets = 0;
+var totalSpent = 0;
+var totalWon = 0;
+var netWorth = 0;
+
 function setBalls(numberOfBalls) {
   var ballsArray = [];
   for (var i = 0; i < numberOfBalls; i++) {
@@ -92,13 +99,21 @@ function totalWinnings() {
   for (var i = 0; i < tickets.length; i++) {
     ticket = tickets[i];
     results = checkTicket(ticket);
+    ticketsPlayed++;
     if (results.winner) {
       winners.push(results);
       //console.log(results);
       winnings += results.winnings;
       //console.log(winnings);
+      winningTickets++;
     }
   }
+}
+
+function setTotals() {
+  totalSpent = ticketsPlayed * ticketPrice;
+  totalWon += winnings;
+  netWorth = totalWon - totalSpent;
 }
 
 function reset() {
@@ -109,17 +124,6 @@ function reset() {
   winners = [];
 }
 
-// winningNumbers = [7, 9, 49, 52, 62, 17];
-
-// tickets.push([7, 9, 49, 52, 62, 17]);
-// tickets.push([7, 9, 49, 52, 62, 3]);
-// tickets.push([7, 9, 49, 52, 61, 3]);
-
-// totalWinnings();
-
-// console.log(winningNumbers);
-// console.log(winners.length);
-// console.log(winnings);
 function play(numberOfTickets) {
   cashSpent = numberOfTickets * ticketPrice;
   reset();
@@ -131,24 +135,45 @@ function play(numberOfTickets) {
     drawWinner();
     setDomBalls();
     totalWinnings();
-    console.log(winningNumbers);
-    console.log(winners.length);
-    console.log('You spent $' + cashSpent + ' and won $' + winnings + ".");
-    $(".card-block h1").text('You spent $' + cashSpent + ' and won $' + winnings + ".");
+    setTotals();
+    $(".card-block h1").text('You spent $' + cashSpent.toLocaleString() + ' and won $' + winnings.toLocaleString() + ".");
+    $("#tickets-played").text(ticketsPlayed);
+    $("#winning-tickets").text(winningTickets);
+    $("#money-spent").text(totalSpent.toLocaleString());
+    $("#money-won").text(totalWon.toLocaleString());
+    $("#net-worth").text(netWorth.toLocaleString());
   }
 }
 
 function badInput() {
   //$(".card-block h1").text(' $' + cashSpent + ' and won $' + winnings + ".");
   //$(".form-control").attr("placeholder", "Fuck that, i'll front you on 100,000 max!");
-  alert("No way you have $" + cashSpent + " to drop on tickets. Try again big shot (max buy = 100,000)");
+  alert("No way you have $" + cashSpent.toLocaleString() + " to drop on tickets. Try again big shot (max buy = 100,000)");
 }
 
 
 //UI jquery
-$(":button").click(function(){
+$("#play").click(function(){
     //$("h1").text($("#tickets").val());
     play($(".form-control").val());
+    $(".form-control").val(null);
+    console.log("hi");
+});
+
+$("#reset").click(function(){
+    //$("h1").text($("#tickets").val());
+    ticketsPlayed = 0;
+    winningTickets = 0;
+    totalSpent = 0;
+    totalWon = 0;
+    netWorth = 0;
+    reset();
+    $(".card-block h1").text("Let's Fucking Gamble!");
+    $("#tickets-played").text(ticketsPlayed);
+    $("#winning-tickets").text(winningTickets);
+    $("#money-spent").text(totalSpent.toLocaleString());
+    $("#money-won").text(totalWon.toLocaleString());
+    $("#net-worth").text(netWorth.toLocaleString());
     console.log("hi");
 });
 
